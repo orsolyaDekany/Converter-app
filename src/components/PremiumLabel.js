@@ -1,7 +1,10 @@
 import './PremiumLabel.css';
-import React from 'react';
+import React, { useContext } from 'react';
+import ConverterContext from '../contexts/ConverterContext';
 
-export default function PremiumLabel() {
+function PremiumLabel() {
+  const { theme } = useContext(ConverterContext);
+
   return (
     <p className="PremiumLabel">
       with{' '}
@@ -15,3 +18,5 @@ export default function PremiumLabel() {
     </p>
   );
 }
+
+export default PremiumLabel;

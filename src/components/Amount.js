@@ -1,9 +1,9 @@
 import './Amount.css';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ConverterContext from '../contexts/ConverterContext';
 
-export default class Amount extends React.Component {
+function Amount {
   static contextType = ConverterContext;
 
   render() {
@@ -50,3 +50,5 @@ Amount.propTypes = {
   onChange: PropTypes.func,
   readOnly: PropTypes.bool,
 };
+
+export default Amount;
