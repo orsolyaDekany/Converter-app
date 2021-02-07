@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Converter from './Converter';
 import ConverterContext from '../contexts/ConverterContext';
 import PremiumLabel from './PremiumLabel';
@@ -8,7 +8,7 @@ import BecomePremiumButton from './BecomePremiumButton';
 
 const MAX_CONVERSION_COUNT = 5;
 
-export default class App extends React.Component {
+function App() {
   constructor(props) {
     super(props);
 
@@ -19,14 +19,14 @@ export default class App extends React.Component {
     };
   }
 
-  componentDidUpdate() {
-    const { conversionCount, premium } = this.state;
+  const [conversionCount, setConversionCount] = useState(0);
 
+  useEffect(() => {
     if (!premium && conversionCount > MAX_CONVERSION_COUNT) {
       alert('Convert without limits with out Premium Package');
-      this.setState({ conversionCount: 0 });
+      setConversionCount(0);
     }
-  }
+  },  [conversionCount, premium]);
 
   handleBecomePremiumButtonClick = () => {
     this.setState({ premium: true });
@@ -82,3 +82,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default App;
