@@ -15,8 +15,8 @@ function Converter (props){
   const [eurosValue, setEurosValue] = useState(0);
   const { premium } = useContext(ConverterContext);
 
-  const handleChange = eurosValue => {
-    this.setState({ eurosValue }, this.props.onConvert);
+  const handleChange = (e) => {
+    setEurosValue(e.target.value);
   };
 
   const cryptoValue = eurosValue * exchangeRate;
