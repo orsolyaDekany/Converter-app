@@ -3,12 +3,15 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import ConverterContext from '../contexts/ConverterContext';
 
-function Amount {
-  static contextType = ConverterContext;
+function Amount (props) {
+  const {
+    label,
+    readOnly,
+    onChange,
+    value
+  } = props
 
-  render() {
-    const { label, readOnly, onChange, value } = this.props;
-    const { premium } = this.context;
+    const { premium } = useContext(ConverterContext);
     const negative = Number.isNaN(value) ? false : value < 0;
 
     const handleChange = event => {
@@ -41,7 +44,6 @@ function Amount {
       </label>
     );
   }
-}
 
 Amount.propTypes = {
   label: PropTypes.string.isRequired,
