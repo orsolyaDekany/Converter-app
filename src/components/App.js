@@ -4,22 +4,21 @@ import Converter from './Converter';
 import ConverterContext from '../contexts/ConverterContext';
 import PremiumLabel from './PremiumLabel';
 import ThemeSelector from './ThemeSelector';
+import usePreferredColorScheme from '../customhooks/usePreferredColorScheme';
 import BecomePremiumButton from './BecomePremiumButton';
 
 const MAX_CONVERSION_COUNT = 5;
 
 function App() {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      theme: 'light',
-      conversionCount: 0,
-      premium: false,
-    };
-  }
 
   const [conversionCount, setConversionCount] = useState(0);
+  const preferredColorScheme = usePreferredColorScheme();
+  const [premium, setPremium] = useState();
+
+
+  const handleConvert = () => {
+    setConversionCount(prevConversionCount => prevConversionCount + 1);
+  };
 
   useEffect(() => {
     if (!premium && conversionCount > MAX_CONVERSION_COUNT) {
@@ -27,25 +26,6 @@ function App() {
       setConversionCount(0);
     }
   },  [conversionCount, premium]);
-
-  handleBecomePremiumButtonClick = () => {
-    this.setState({ premium: true });
-  };
-
-  handleConvert = () => {
-    this.setState(({ conversionCount }) => ({
-      conversionCount: conversionCount + 1,
-    }));
-  };
-
-  handleThemeChange = theme => {
-    this.setState({
-      theme,
-    });
-  };
-
-  render() {
-    const { theme, premium } = this.state;
 
     return (
       <ConverterContext.Provider value={{ theme, premium }}>
@@ -67,20 +47,19 @@ function App() {
               cryptoLabel="Bitcoins"
               cryptoShortLabel="BTC"
               exchangeRate={0.5}
-              onConvert={this.handleConvert}
+              onConvert={handleConvert}
             />
 
             <Converter
               cryptoLabel="Ethereum"
               cryptoShortLabel="ETH"
               exchangeRate={1.2}
-              onConvert={this.handleConvert}
+              onConvert={handleConvert}
             />
           </section>
         </main>
       </ConverterContext.Provider>
     );
   }
-}
 
 export default App;
