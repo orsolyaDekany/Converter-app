@@ -13,8 +13,8 @@ function App() {
 
   const [conversionCount, setConversionCount] = useState(0);
   const preferredColorScheme = usePreferredColorScheme();
-  const [premium, setPremium] = useState();
-
+  const [premium, setPremium] = useCachedState('premium', false);
+  const theme = selectedTheme || preferredColorScheme;
 
   const handleConvert = () => {
     setConversionCount(prevConversionCount => prevConversionCount + 1);
@@ -36,9 +36,7 @@ function App() {
             {premium ? (
               <PremiumLabel />
             ) : (
-              <BecomePremiumButton
-                onClick={this.handleBecomePremiumButtonClick}
-              />
+              <BecomePremiumButton onClick={() => setPremium(true)} />
             )}
           </header>
 

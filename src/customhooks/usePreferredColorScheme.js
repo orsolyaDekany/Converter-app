@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export default function usePreferredColorScheme() {
+function usePreferredColorScheme() {
   const [preferredColorScheme, setPreferredColorscheme] = useState('light');
 
   useEffect(() => {
@@ -20,3 +20,6 @@ export default function usePreferredColorScheme() {
 
   return preferredColorScheme;
 }
+
+
+export default usePreferredColorScheme;
